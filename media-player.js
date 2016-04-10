@@ -1,21 +1,12 @@
-// Sample Media Player using HTML5's Media API
-// 
-// Ian Devlin (c) 2012
-// http://iandevlin.com
-// http://twitter.com/iandevlin
-//
-// This was written as part of an article for the February 2013 edition of .net magazine (http://netmagazine.com/)
 
 // Wait for the DOM to be loaded before initialising the media player
 document.addEventListener("DOMContentLoaded", function() { initialiseMediaPlayer(); }, false);
 window.addEventListener('load', function() {
     var video = document.querySelector('#media-video');
-    //var preloader = document.querySelector('.preloader');
 
     function checkLoad() {
         if (video.readyState === 4) {
         	jQuery('#media-controls .overlay').remove();
-        	jQuery('#tt-dr').text(convert_time(video.duration));
         } else {
             setTimeout(checkLoad, 100);
         }
@@ -23,7 +14,18 @@ window.addEventListener('load', function() {
 
     checkLoad();
 }, false);
+$(document).ready(function(){
+	$("#media-video").on(
+		"timeupdate",
+		function(event){
+			onTrackedVideoFrame(this.currentTime, this.duration);
+		});
+})
 
+function onTrackedVideoFrame(currentTime, duration){
+	$("#cr-dr").text(convert_time(currentTime));
+	$("#tt-dr").text(convert_time(duration));
+}
 // Variables to store handles to various required elements
 var mediaPlayer;
 var playPauseBtn;
@@ -33,6 +35,7 @@ var media_controller=jQuery('#media-controls');
 var play_list=new Array();
 var play_list_cnt=0;
 var config='';
+var video='';
 function initialiseMediaPlayer() {
 	// Get a handle to the player
 	mediaPlayer = document.getElementById('media-video');
@@ -173,7 +176,6 @@ function resetPlayer() {
 	progressBar.value = 0;
 	// Move the media back to the start
 	mediaPlayer.currentTime = 0;
-	jQuery('#tt-dr').text(convert_time(mediaPlayer.duration));
 	// Ensure that the play pause button is set as 'play'
 	changeButtonType(playPauseBtn, 'play');
 }
