@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--
+// Sample Media Player using HTML5's Media API
+// 
+// Ian Devlin (c) 2012
+// http://iandevlin.com
+// http://twitter.com/iandevlin
+//
+// This was written as part of an article for the February 2013 edition of .net magazine (http://netmagazine.com/)
+-->
+<html lang='en'>
+	<head>
+		<meta charset='utf-8' />
+		<title>Sample Media Player using HTML5's Media API</title>
+		<link rel="stylesheet prefetch" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+		<link href='media-player.css' rel='stylesheet' />
+		
+	</head>
+<body>
+	<div id='media-player'>
+		<video id='media-video' autoplay="true" controls="false" >
+			<source src='http://www.w3schools.com/tags/movie.mp4' type='video/mp4'>
+			<source src='http://www.w3schools.com/tags/movie.mp4' type='video/mp4'>
+			<source src='http://www.w3schools.com/tags/movie.mp4' type='video/mp4'>
+			Your browser does not support the video tag
+		</video>
+		<div id='media-controls' data-config='{"nextBtn":"true","prevBtn":"true"}'>
+			<div class="ctl-top">
+				<progress id='progress-bar' min='0' max='100' value='0'>0% played</progress>
+			</div>
+			<div class="ctl-bottom">
+				<div class="ctl-left">
+					<button id='replay-button' class='replay player-button' title='replay' onclick='replayMedia();'>Replay</button>	
+					<button id='play-pause-button' class='play player-button' title='play' onclick='togglePlayPause();'>Play</button>
+					<div id="volume-ctl">
+						<button id='mute-button' class='mute player-button' title='mute' onclick='toggleMute("true");'>Mute</button>
+						<div id="volume" style="display:none;"></div>
+					</div>
+					<div id="duration-ctl" class="dp-ib">
+						<span id="cr-dr">00:00</span>/<span id="tt-dr">00:00</span>
+					</div>
+	
+				</div>
+				<div class="ctl-right">
+					<button id='stop-button' class='stop player-button hide' title='stop' onclick='stopPlayer();'>Stop</button>
+					<button class="full-screen" >click</button>
+					
+					
+				</div>
+			</div>
+		</div>
+		<ul id='media-play-list' class="hide">
+				<li>http://thenewcode.com/assets/videos/glacier.mp4</li>
+				<li>http://flashuser.net/_html5videoplayer/media/1/main/01.mp4</li>
+				<li>http://flashuser.net/_html5videoplayer/media/1/main/02.mp4</li>
+				<li>http://flashuser.net/_html5videoplayer/media/1/main/03.mp4</li>
+				<li>http://flashuser.net/_html5videoplayer/media/1/main/04.mp4</li>
+		</ul>
+	</div>	
+
+</body>
+<script   src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<script src='media-player.js'></script>
+</html>
